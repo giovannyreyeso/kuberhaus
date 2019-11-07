@@ -70,7 +70,7 @@ func main() {
 		panic(err.Error())
 	}
 
-	http.HandleFunc("/nodes", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/nodes", func(w http.ResponseWriter, r *http.Request) {
 		cors(&w)
 		items, err := nodes(clientset)
 		str, err := json.MarshalIndent(items, "", "    ")
@@ -82,7 +82,7 @@ func main() {
 		w.Write(str)
 	})
 
-	http.HandleFunc("/pods", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/pods", func(w http.ResponseWriter, r *http.Request) {
 		cors(&w)
 		items, err := pods(clientset)
 		str, err := json.MarshalIndent(items, "", "    ")
@@ -93,7 +93,7 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(str)
 	})
-	http.HandleFunc("/services", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/services", func(w http.ResponseWriter, r *http.Request) {
 		items, err := services(clientset)
 		str, err := json.MarshalIndent(items, "", "    ")
 		if err != nil {
@@ -104,7 +104,7 @@ func main() {
 		w.Write(str)
 	})
 
-	http.HandleFunc("/metrics/nodes", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/metrics/nodes", func(w http.ResponseWriter, r *http.Request) {
 		cors(&w)
 		items, err := nodeMetrics(metricset, clientset)
 		str, err := json.MarshalIndent(items, "", "    ")
@@ -115,7 +115,7 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(str)
 	})
-	http.HandleFunc("/metrics/pods", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/metrics/pods", func(w http.ResponseWriter, r *http.Request) {
 		cors(&w)
 		items, err := podMetrics(metricset)
 		str, err := json.MarshalIndent(items, "", "    ")

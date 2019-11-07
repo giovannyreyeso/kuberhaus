@@ -26,7 +26,7 @@ interface EntityRequest {
 }
 
 const config: Config = {
-  url: 'http://localhost:8282',
+  url: 'http://localhost/api',
   token: 'token'
 }
 
